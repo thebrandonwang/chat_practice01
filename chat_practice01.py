@@ -22,8 +22,6 @@ def write_file(filename, new):
 		for line in new:
 			f.write(line + '\n')
 
-
-
 def main():
 	chats = []
 	chats = read_file('input.txt', chats)

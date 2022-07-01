@@ -1,21 +1,26 @@
 def read_file(filename, chats):
 	with open (filename, 'r', encoding='utf-8-sig') as f:
-		person = None
 		for line in f:
-			if 'Allen' in line:
-				person = 'Allen'
-				continue
-			elif 'Tom' in line:
-				person = 'Tom'
-				continue
-			elif person:
-				chats.append([person, line.strip()])
+			chats.append(line.strip())
 		return chats
 
-def write_file(filename, chats):
+def convert(chats, new):
+	person = None
+	for line in chats:
+		if line == 'Allen':
+			person = 'Allen'
+			continue
+		elif line == 'Tom':
+			person = 'Tom'
+			continue
+		if person:
+			new.append(person + ': ' + line)
+	return new
+
+def write_file(filename, new):
 	with open(filename, 'w', encoding='utf-8-sig') as f:
-		for chat in chats:
-			f.write(chat[0] + ': ' + chat[1] + '\n')
+		for line in new:
+			f.write(line + '\n')
 
 
 
@@ -23,6 +28,9 @@ def main():
 	chats = []
 	chats = read_file('input.txt', chats)
 	print(chats)
-	write_file('output.txt', chats)
+	new = []
+	new = convert(chats, new)
+	print(new)
+	write_file('output.txt', new)
 
 main()
